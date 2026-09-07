@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="MappeApplication (stub)" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="it.epicode.demo.mappe.MappeApplication" />
+    <module name="w1d1-mappe-geocoding" />
+    <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+    <option name="VM_PARAMETERS" value="-Dspring.profiles.active=stub" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

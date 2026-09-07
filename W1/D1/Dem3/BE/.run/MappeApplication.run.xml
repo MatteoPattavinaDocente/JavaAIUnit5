@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="MappeApplication" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="it.epicode.demo.mappe.MappeApplication" />
+    <module name="w1d1-mappe-geocoding" />
+    <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

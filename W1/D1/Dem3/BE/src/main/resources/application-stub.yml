@@ -1,0 +1,8 @@
+# Profilo "stub": il client di geocoding punta al nostro stesso server, dove
+# GeocodingStubController risponde 429. Serve per mostrare a lezione il ramo
+# "quota superata".
+spring:
+  http:
+    serviceclient:
+      geocoding:
+        base-url: http://localhost:8080
