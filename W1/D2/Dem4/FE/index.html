@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fe</title>
+
+    <script>
+      // ROMPIAMO IL WEBSOCKET DEL BROWSER, PER VEDERE CHI RIPIEGA.
+      //
+      // Perche' questo codice sta qui, in index.html, e non in un file TypeScript?
+      // Perche' deve girare PRIMA che venga importato sockjs-client. Quella libreria
+      // si copia il riferimento a globalThis.WebSocket una volta sola, al momento
+      // dell'import (dentro lib/transport/browser/websocket.js fa
+      // "var Driver = global.WebSocket"). Dopo, sostituirlo non serve a niente:
+      // SockJS ha gia' in mano quello vero.
+      //
+      // Ed e' anche il motivo per cui il tasto "Stacca WebSocket" ricarica la pagina
+      // invece di fare tutto a caldo: ci serve un avvio da zero, con la sostituzione
+      // gia' fatta.
+      //
+      // Notate che qui sotto non c'e' una riga di STOMP e nemmeno di SockJS:
+      // stiamo solo manomettendo un pezzo del browser.
+      ;(function () {
+        if (sessionStorage.getItem('ws-modalita') !== 'websocket-rotto') return
+
+        // COME LO ROMPIAMO, e perche' in questo modo.
+        //
+        // Non cancelliamo il WebSocket: lo lasciamo esistere ma facciamo in modo che
+        // non si apra. E' il caso vero, quello del proxy aziendale che accetta la
+        // connessione e poi la chiude. Per ottenerlo dirottiamo l'handshake su una
+        // porta chiusa (59999), cosi' il tentativo fallito si vede DAVVERO nel
+        // pannello Network del browser (filtro WS, riga rossa) e non e' una finzione
+        // nascosta dentro JavaScript.
+        //
+        // Cosa fa SockJS quando lo riceve: la connessione si chiude con codice 1006
+        // mentre e' ancora in CONNECTING, e in quel caso _transportClose richiama
+        // _connect(), che passa al trasporto successivo della lista: xhr-streaming.
+        //
+        // Perche' riscriviamo solo la porta 8080 e non ogni indirizzo: l'HMR di Vite
+        // (il ricaricamento automatico durante lo sviluppo) apre un WebSocket suo
+        // verso la porta 5173 e deve continuare a funzionare, altrimenti la console
+        // si riempie di errori che non hanno niente a che vedere con la demo.
+        var Vero = window.WebSocket
+        var Dirottato = function (url, protocolli) {
+          var dirottato = String(url).replace(':8080', ':59999')
+          return protocolli === undefined
+            ? new Vero(dirottato)
+            : new Vero(dirottato, protocolli)
+        }
+        Dirottato.CONNECTING = 0
+        Dirottato.OPEN = 1
+        Dirottato.CLOSING = 2
+        Dirottato.CLOSED = 3
+        Dirottato.sostituito = true
+        window.WebSocket = Dirottato
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,130 @@
+body {
+  margin: 0;
+  padding: 2rem;
+  font-family: system-ui, sans-serif;
+  color: #222;
+}
+
+h1 {
+  font-size: 1.4rem;
+}
+
+.barra {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.stato {
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: #fdecea;
+  color: #b00;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.stato.connesso {
+  background: #e8f5e9;
+  color: #070;
+}
+
+.area {
+  max-width: 46rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.area header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.8rem;
+  background: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+}
+
+.area .conteggio {
+  margin-right: auto;
+  padding: 0 0.5rem;
+  border-radius: 999px;
+  background: #e0e0e0;
+  font-size: 0.8rem;
+}
+
+.area ul {
+  max-height: 22rem;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.area li {
+  display: grid;
+  grid-template-columns: 6rem 11rem 1fr;
+  gap: 0.6rem;
+  padding: 0.5rem 0.8rem;
+  border-bottom: 1px solid #eee;
+  font-size: 0.9rem;
+}
+
+/* L'ultimo arrivato si distingue: a lezione si guarda solo quello. */
+.area li.ultimo {
+  background: #fffbe6;
+}
+
+.area .ora {
+  color: #777;
+  font-variant-numeric: tabular-nums;
+}
+
+.area .destinazione {
+  font-family: ui-monospace, monospace;
+  color: #05c;
+  font-size: 0.82rem;
+}
+
+.area .testo {
+  font-weight: 600;
+}
+
+.area .vuoto {
+  margin: 0;
+  padding: 1.5rem 0.8rem;
+  color: #777;
+  text-align: center;
+}
+
+.area .vuoto code {
+  display: block;
+  margin-top: 0.6rem;
+  color: #444;
+  font-size: 0.8rem;
+}
+
+.nota {
+  max-width: 46rem;
+  margin-top: 1.2rem;
+  color: #555;
+  font-size: 0.88rem;
+}
+
+code {
+  font-family: ui-monospace, monospace;
+}
+
+button {
+  padding: 0.35rem 0.7rem;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+}
+
+button:disabled {
+  color: #999;
+  cursor: default;
+}

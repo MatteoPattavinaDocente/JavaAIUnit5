@@ -1,0 +1,166 @@
+body {
+  margin: 0;
+  padding: 2rem;
+  font-family: system-ui, sans-serif;
+  color: #222;
+}
+
+.barra {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.barra h1 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.campanella {
+  position: relative;
+  margin-left: auto;
+}
+
+.bottone-campanella {
+  position: relative;
+  padding: 0.3rem;
+  font-size: 1.6rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.badge {
+  position: absolute;
+  top: 0;
+  right: -0.1rem;
+  padding: 0 0.4rem;
+  border-radius: 999px;
+  background: #d00;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.pannello {
+  position: absolute;
+  right: 0;
+  z-index: 1;
+  width: 30rem;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.18);
+}
+
+.pannello header,
+.pannello footer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.8rem;
+  background: #f5f5f5;
+}
+
+.pannello header .non-lette {
+  margin-right: auto;
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.pannello footer {
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.pannello ul {
+  max-height: 20rem;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.pannello li {
+  display: grid;
+  grid-template-columns: 7rem 1fr auto;
+  gap: 0.2rem 0.6rem;
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid #eee;
+}
+
+.pannello li.da-leggere {
+  border-left: 3px solid #d00;
+  background: #fffdf7;
+}
+
+.pannello li.letta {
+  color: #888;
+}
+
+.pannello .tipo {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.pannello .titolo {
+  font-weight: 600;
+}
+
+.pannello .quando {
+  grid-column: 2;
+  font-size: 0.78rem;
+  color: #777;
+}
+
+.pannello .segna {
+  grid-row: 1 / span 2;
+  align-self: center;
+  font-size: 0.75rem;
+}
+
+.pannello .vuoto {
+  display: block;
+  padding: 1.5rem;
+  color: #888;
+  text-align: center;
+}
+
+.avviso {
+  margin: 0;
+  padding: 0.6rem 0.8rem;
+  border-top: 1px solid #eee;
+  background: #fff8e1;
+  font-size: 0.8rem;
+  color: #6a4b00;
+}
+
+.telecomando {
+  max-width: 34rem;
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
+}
+
+.telecomando h2 {
+  font-size: 1.05rem;
+}
+
+.nota {
+  color: #666;
+  font-size: 0.85rem;
+}
+
+button {
+  padding: 0.35rem 0.7rem;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+}
+
+button:disabled {
+  color: #999;
+  cursor: default;
+}

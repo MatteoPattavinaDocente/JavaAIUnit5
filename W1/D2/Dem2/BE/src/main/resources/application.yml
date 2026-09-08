@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: w1d2-notifiche
+
+  datasource:
+    # ${VARIABILE:valore_di_default}: se esiste la variabile d'ambiente usa quella,
+    # altrimenti usa il valore dopo i due punti. Cosi' in classe funziona senza configurare niente.
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/W1D2Dem1234_Notifiche}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:admin}
+
+  jpa:
+    hibernate:
+      # update: all'avvio Hibernate guarda le classi @Entity e crea o aggiorna
+      # le tabelle da solo. Comodo a lezione, da NON usare in produzione:
+      # li' lo schema si gestisce con migrazioni scritte a mano (Flyway, Liquibase).
+      ddl-auto: update
+    # open-in-view: false chiude la sessione Hibernate quando finisce il service.
+    # Se lasciato acceso (il default di Spring Boot), il database resterebbe agganciato
+    # fino alla scrittura della risposta e potrebbero partire query a nostra insaputa.
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          # Le date le salviamo sempre in UTC. Il fuso orario e' un problema
+          # di chi mostra il dato, non di chi lo conserva.
+          time_zone: UTC
+
+app:
+  cors:
+    # In questa demo questo indirizzo non serve alle chiamate REST, ma all'handshake
+    # WebSocket: e' l'origine che WebSocketConfig autorizza a collegarsi su /ws.
+    allowed-origin: ${ALLOWED_ORIGIN:http://localhost:5173}
+
+logging:
+  level:
+    it.epicode.demo.notifiche: DEBUG
+    # Acceso apposta: cosi' nel terminale si vede che "segna tutte lette"
+    # produce una sola UPDATE e non una per notifica.
+    org.hibernate.SQL: DEBUG
+    # Handshake, apertura e chiusura delle sessioni WebSocket.
+    # Qui non c'e' nessun broker da spiare: l'unico registro delle sessioni
+    # e' quello che teniamo noi dentro EchoWebSocketHandler.
+    org.springframework.web.socket: DEBUG

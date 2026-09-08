@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: w1d2-notifiche
+
+  datasource:
+    # ${VARIABILE:valore_di_default}: se esiste la variabile d'ambiente usa quella,
+    # altrimenti usa il valore dopo i due punti. Cosi' in classe funziona senza configurare niente.
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/W1D2Dem1234_Notifiche}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:admin}
+
+  jpa:
+    hibernate:
+      # update: all'avvio Hibernate guarda le classi @Entity e crea o aggiorna
+      # le tabelle da solo. Comodo a lezione, da NON usare in produzione:
+      # li' lo schema si gestisce con migrazioni scritte a mano (Flyway, Liquibase).
+      ddl-auto: update
+    # open-in-view: false chiude la sessione Hibernate quando finisce il service.
+    # Se lasciato acceso (il default di Spring Boot), il database resterebbe agganciato
+    # fino alla scrittura della risposta e potrebbero partire query a nostra insaputa.
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          # Le date le salviamo sempre in UTC. Il fuso orario e' un problema
+          # di chi mostra il dato, non di chi lo conserva.
+          time_zone: UTC
+
+app:
+  cors:
+    # Serve due volte: a CorsConfig per le chiamate REST e a WebSocketConfig per
+    # l'endpoint STOMP. Stesso indirizzo, due autorizzazioni distinte.
+    allowed-origin: ${ALLOWED_ORIGIN:http://localhost:5173}
+
+logging:
+  level:
+    it.epicode.demo.notifiche: DEBUG
+    # Acceso apposta: cosi' nel terminale si vede che "segna tutte lette"
+    # produce una sola UPDATE e non una per notifica.
+    org.hibernate.SQL: DEBUG
+    # Adesso un broker da spiare c'e', e questi tre livelli rendono visibili
+    # le tre fasi: l'handshake, la sessione STOMP (CONNECT e DISCONNECT) e
+    # le sottoscrizioni gestite dal broker.
+    org.springframework.web.socket: DEBUG
+    org.springframework.web.socket.messaging: DEBUG
+    org.springframework.messaging.simp.broker: DEBUG

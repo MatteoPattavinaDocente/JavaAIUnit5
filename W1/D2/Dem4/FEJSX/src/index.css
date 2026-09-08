@@ -1,0 +1,267 @@
+body {
+  font-family: system-ui, sans-serif;
+  margin: 2rem;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.stato {
+  font-weight: 600;
+}
+
+.stato.connesso {
+  color: #070;
+}
+
+.stato.in-riconnessione {
+  color: #b60;
+}
+
+.stato.offline {
+  color: #b00;
+}
+
+.campanella {
+  position: relative;
+}
+
+.campanella button {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.badge {
+  position: absolute;
+  top: 0;
+  right: -0.2rem;
+  background: #d00;
+  color: #fff;
+  border-radius: 999px;
+  padding: 0 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.pannello {
+  position: absolute;
+  right: 0;
+  width: 22rem;
+  margin: 0;
+  padding: 0.5rem;
+  list-style: none;
+  background: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.15);
+  z-index: 1;
+}
+
+.pannello li {
+  display: flex;
+  flex-direction: column;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.pannello li.letta {
+  color: #888;
+}
+
+.pannello small {
+  color: #666;
+}
+
+.suggerimento {
+  margin-top: 2rem;
+  font-family: ui-monospace, monospace;
+  color: #555;
+}
+
+/* --- i pannelli della demo --- */
+
+.pannelli {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+  gap: 1rem;
+  align-items: start;
+  margin-top: 1.5rem;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  background: #fafafa;
+}
+
+.card h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #333;
+}
+
+.card h3 {
+  margin: 1rem 0 0.4rem;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.card label {
+  display: block;
+  margin: 0.3rem 0;
+}
+
+.card code {
+  font-family: ui-monospace, monospace;
+  background: #eee;
+  padding: 0 0.2rem;
+  border-radius: 3px;
+}
+
+.pill {
+  font-family: ui-monospace, monospace;
+  font-size: 0.8rem;
+  background: #333;
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.1rem 0.6rem;
+}
+
+.riga-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0.2rem 0 0.6rem;
+}
+
+.bottoni {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.4rem 0;
+}
+
+.bottoni label {
+  margin: 0;
+}
+
+.nota {
+  margin: 0.3rem 0 0;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: #555;
+}
+
+.avviso {
+  margin: 0.5rem 0 0;
+  padding: 0.5rem 0.6rem;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  border-left: 4px solid #b60;
+  background: #fff6e5;
+  color: #603000;
+}
+
+.destinazioni {
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.destinazioni li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.2rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.arrivi {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-height: 18rem;
+  overflow: auto;
+}
+
+.arrivi li {
+  padding: 0.3rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.arrivi small {
+  color: #777;
+  margin-left: 0.5rem;
+}
+
+.arrivi pre {
+  margin: 0.2rem 0 0;
+  font-size: 0.75rem;
+  white-space: pre-wrap;
+  word-break: break-all;
+  color: #333;
+}
+
+.log {
+  max-height: 18rem;
+  overflow: auto;
+  margin: 0.4rem 0 0;
+  padding: 0.5rem;
+  background: #1e1e1e;
+  color: #ddd;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.riga-out {
+  color: #7fd1ff;
+}
+
+.riga-in {
+  color: #9be89b;
+}
+
+.riga-nota {
+  color: #e0c060;
+}
+
+.strade {
+  margin: 0.5rem 0 0;
+  padding-left: 1.2rem;
+}
+
+.strade li {
+  margin-bottom: 0.7rem;
+}
+
+.strade small {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: #555;
+}
+
+.misura {
+  margin: 0.4rem 0 0;
+  padding: 0.5rem 0.6rem;
+  border-left: 4px solid #070;
+  background: #eef8ee;
+  font-size: 0.85rem;
+}
+
+.misura small {
+  color: #555;
+}
