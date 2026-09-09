@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: d3-demo02-ocr
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+app:
+  cors:
+    allowed-origin: ${ALLOWED_ORIGIN:http://localhost:5173}
+
+ocr:
+  # Cartella con i file .traineddata.
+  # Windows:  C:/Program Files/Tesseract-OCR/tessdata
+  # Linux:    /usr/share/tesseract-ocr/5/tessdata
+  # macOS:    /opt/homebrew/share/tessdata
+  tessdata-path: ${TESSDATA_PATH:C:/Program Files/Tesseract-OCR/tessdata}
+  language: ${OCR_LANGUAGE:ita}
+
+logging:
+  level:
+    it.epicode.demo.ocr: INFO

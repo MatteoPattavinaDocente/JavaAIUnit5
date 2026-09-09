@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: d3-demo03-allegati
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/W1D3Dem2_Allegati}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:admin}
+
+  jpa:
+    hibernate:
+      # In demo lo schema lo crea Hibernate: una tabella sola.
+      ddl-auto: update
+    open-in-view: false
+
+  servlet:
+    multipart:
+      # Limite della singola parte.
+      max-file-size: 2MB
+      # Limite della somma di tutte le parti.
+      max-request-size: 8MB
+      # Oltre questa soglia la parte viene scritta su disco invece che tenuta in memoria.
+      file-size-threshold: 512KB
+
+app:
+  cors:
+    allowed-origin: ${ALLOWED_ORIGIN:http://localhost:5173}
+
+attachments:
+  storage-dir: ${STORAGE_DIR:./uploads}
+  # Il numero di file non ha un parametro Spring: si controlla nel codice.
+  max-files: 5
+
+logging:
+  level:
+    it.epicode.demo.allegati: INFO

@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: d3-demo04-scatto
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
+
+app:
+  cors:
+    allowed-origin: ${ALLOWED_ORIGIN:http://localhost:5173}
+
+ocr:
+  tessdata-path: ${TESSDATA_PATH:C:/Program Files/Tesseract-OCR/tessdata}
+  language: ${OCR_LANGUAGE:ita}
+
+scan:
+  storage-dir: ${STORAGE_DIR:./uploads}
+
+logging:
+  level:
+    it.epicode.demo.scatto: INFO

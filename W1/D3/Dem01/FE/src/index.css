@@ -1,0 +1,85 @@
+:root {
+  color-scheme: light;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --bordo: #d5d8dd;
+  --avviso: #b23c17;
+  --ok: #1d7a46;
+}
+
+body {
+  margin: 0;
+  background: #f6f7f9;
+  color: #1c1f24;
+}
+
+main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 4rem;
+}
+
+h1 {
+  margin-bottom: 0.2rem;
+}
+
+.sub {
+  margin-top: 0;
+  color: #5a6069;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid var(--bordo);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0.5rem 0;
+}
+
+button {
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--bordo);
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--bordo);
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+textarea {
+  width: 100%;
+  font-family: ui-monospace, monospace;
+  font-size: 0.8rem;
+}
+
+pre {
+  white-space: pre-wrap;
+  background: #f2f3f5;
+  padding: 0.75rem;
+  border-radius: 6px;
+}
+
+.errore {
+  border-color: var(--avviso);
+  color: var(--avviso);
+}
