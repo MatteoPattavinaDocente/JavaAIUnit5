@@ -1,0 +1,10 @@
+/* Le regole di layout stanno in App.css: qui solo i default della pagina. */
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}

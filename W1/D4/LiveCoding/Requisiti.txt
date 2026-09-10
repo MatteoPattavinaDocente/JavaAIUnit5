@@ -1,0 +1,107 @@
+Entità
+
+Utente
+ID -  guuid
+username - string (UNIQUE)
+password - string (Da valutare se hash o meno)
+created_at - Instant
+
+Canale
+ID - guuid
+Nome - string
+Descrizione - text
+created_at - Instant
+ID_Utente - guuid (1:N)
+
+Iscrizione
+ID - guuid
+created_at - Instant
+ID_Utente - guuid (1:N)
+ID_Canale - guuid (1:N)
+
+Notifiche
+ID - guuid
+ID_Destinatario - guuid (1:N)
+ID_Canale - guuid (0:N) (Se valorizzato la notifica è di un canale, altrimenti no Notifica di sistema)
+Tipo - ENUM (Personal, Canale, ALL)
+message - text
+created_at - Instant
+read_at - Instant (DEFAULT : NULL)
+
+CHECK (SE ID_Canale == NULL -> ENUM per forza Personal o ALL)
+
+----------------------------------------------------------------
+Controller/Endpoint
+
+Controller Utente
+POST : LOGIN (Username e Password) NO JWT
+Servizio controlla se corrispondono
+	Se si : Fa entrare (Extra : generazione JWT)
+	Se no : Errore Generico 
+
+POST : Registrazione (Username e Password) NO JWT
+Servizio (Controlla che non esista già)
+	Se esiste : 400 (Username gia in uso)
+	Se non esiste : 201 Created
+
+(Vedere se dopo registrazione fare login automatico o no)
+
+Logout : RICHIEDE JWT
+
+
+Controller Canale
+
+Post Creazione (Nome, Descrizione, ID_Utente (Da jwt)) JWT
+Servizio : Crea un record canale
+
+GET ALL CANALI (Ritorna Id,Nome,Descrizione)
+Servizio : Ritorna tutti i canali in ordine di creazione DESC Paginato con LIMIT 15
+
+GET Canali Iscritto (Ritorna Id,Nome,Descrizione,ID_Utente (Da JWT))
+Servizio : Ritorna tutti i canali in ordine di creazione DESC Paginato con LIMIT 15 in cui sono iscritto
+
+Select * 
+FROM CANALE
+INNER JOIN Iscrizione ON Iscrizione.ID_Canale = Canale.ID
+WHERE Iscrizione.ID_Utente = ID_DA_TOKEN_JWT
+LIMIT 15
+
+Controller Iscrizione
+POST FollowCanale (ID_Canale, ID_Utente)
+
+DELETE UnfollowCanale (ID_Canale, ID_Utente)
+
+
+CONTROLLER NOTIFICHE
+
+GetAll (Input ID_Utente da JWT, Output Tipo, ID_ Notifica, ID_Canale, Messaggio)
+Servizio -> Recuperare tutte le notifiche prima le non lette poi le successive in ordine DESC LIMIT
+
+PATCH ReadNotification(ID_Notifica)
+Popola il campo read_at di quella notifica a CurrentTimeStamp
+
+POST ReadAllNotification(ID_Utente)
+Popola il campo read_at di tutte le notifiche non lette dell'utente loggato.
+
+POST Creazione di una notifica
+
+TIPO : Utente -> Notifiche di Sistema indirizzate ad un solo utente
+	All -> Notifiche di Sistema indirizzate a tutti
+	Canale -> Notifiche indirizzate solo agli iscitti al canale (Qua conta ID_Canale)
+	In questo caso mi prendo i destinatari dall'iscrizione e creo tanti record quanti sono gli iscritti
+
+Service prova a vedere se esiste una sessione websocket con l'id del destinatario e con il topic id_canale. Se esiste la manda subito sul canale websocket
+
+CountNotification : 
+GET (Input ID_Utente da JWT, Output numero di notifiche non lette)
+Conta quante notifiche non lette ha l'utente loggato
+
+
+
+
+
+
+
+
+
+  
