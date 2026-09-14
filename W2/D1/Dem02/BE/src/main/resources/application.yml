@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: d1-demo02-invio
+
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    # Senza valore predefinito: l'applicazione non parte se manca (slide 9).
+    username: ${MAIL_USERNAME}
+    # Password per le app di Google, non quella dell'account (slide 11).
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          # Obbligatorie con Gmail: non le mette Spring Boot.
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+        debug: ${MAIL_DEBUG:false}
+
+  threads:
+    # I compiti @Async girano su thread virtuali: l'attesa di rete costa poco
+    # anche in serie (slide 22). Si vede nel nome del thread, nel registro.
+    virtual:
+      enabled: true
+
+app:
+  mail:
+    # Gmail riscrive il From con l'account autenticato (slide 20): il valore
+    # predefinito e' l'utenza stessa, cosi' il campo mostra quello che arriva.
+    mittente: ${MAIL_FROM:${MAIL_USERNAME}}
+    # Reply-To invece Gmail lo rispetta: e' il modo di far tornare le risposte
+    # a un indirizzo diverso dal mittente.
+    rispondi-a: ${MAIL_REPLY_TO:${MAIL_USERNAME}}
+  cors:
+    allowed-origin: ${ALLOWED_ORIGIN:http://localhost:5173}
+
+logging:
+  level:
+    it.epicode.demo.invio: INFO

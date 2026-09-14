@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+<body>
+
+<div th:fragment="piede"
+     style="margin-top:28px; padding-top:16px; border-top:1px solid #d5d8dd;
+            font-size:12px; line-height:1.5; color:#5a6069;">
+  <p th:text="#{email.piede.motivo}" style="margin:0 0 6px;">
+    Ricevi questo messaggio perché qualcuno ha usato questo indirizzo per iscriversi.
+  </p>
+  <p th:text="#{email.piede.firma}" style="margin:0;">EPICODE — Rome, Milan, Malta</p>
+</div>
+
+</body>
+</html>

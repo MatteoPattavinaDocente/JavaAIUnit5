@@ -1,0 +1,13 @@
+EPICODE - ricevuta di iscrizione
+=================================
+
+Numero        : 2026/000417
+Data          : 01/09/2026
+Corso         : Java AI - Settimana 2, Giorno 1
+Importo       : incluso nel percorso
+
+Questo file viaggia come allegato: il client di posta lo mostra separato dal
+corpo del messaggio e lo scarica solo se l'utente lo chiede.
+
+Un'immagine inline, invece, viene mostrata dentro il corpo e si richiama con
+cid: - vedi il modo INLINE della demo.

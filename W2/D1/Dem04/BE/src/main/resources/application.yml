@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: d1-demo04-verifica
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/W2D1Dem4_Verifica}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:admin}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    show-sql: false
+
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+        debug: ${MAIL_DEBUG:false}
+
+  thymeleaf:
+    cache: false
+
+  messages:
+    basename: messages
+    encoding: UTF-8
+
+app:
+  mail:
+    # Gmail riscrive il From con l'account autenticato (slide 20).
+    mittente: ${MAIL_FROM:${MAIL_USERNAME}}
+  # Il collegamento dell'email deve essere assoluto e raggiungibile da chi apre
+  # la posta: in produzione e' il dominio pubblico, non localhost.
+  base-url: ${APP_BASE_URL:http://localhost:8080}
+  token:
+    # Ventiquattro ore e' il valore consueto (slide 41). Abbassarlo a 0 in aula
+    # per far vedere lo stato SCADUTO.
+    validita-ore: ${TOKEN_VALIDITA_ORE:24}
+  cors:
+    allowed-origin: ${ALLOWED_ORIGIN:http://localhost:5173}
+
+logging:
+  level:
+    it.epicode.demo.verifica: INFO

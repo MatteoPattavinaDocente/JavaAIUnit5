@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+<body>
+
+<!--
+  th:fragment marca un blocco riutilizzabile; th:replace lo inserisce nel
+  template che lo chiama (slide 33). Intestazione e piede di pagina si scrivono
+  una volta sola e valgono per tutte le email.
+-->
+<div th:fragment="piede"
+     style="margin-top:28px; padding-top:16px; border-top:1px solid #d5d8dd;
+            font-size:12px; line-height:1.5; color:#5a6069;">
+  <p th:text="#{email.piede.motivo}" style="margin:0 0 6px;">
+    Ricevi questo messaggio perché ti sei iscritto a EPICODE.
+  </p>
+  <p style="margin:0;">
+    <span th:text="#{email.piede.firma}">EPICODE — Rome, Milan, Malta</span>
+  </p>
+</div>
+
+</body>
+</html>

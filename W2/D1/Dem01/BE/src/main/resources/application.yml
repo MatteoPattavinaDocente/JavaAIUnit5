@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: d1-demo01-smtp
+
+  mail:
+    # Senza questa chiave l'auto-configurazione non crea il bean JavaMailSender
+    # e l'applicazione non parte (slide 7 e 46).
+    host: ${MAIL_HOST:smtp.gmail.com}
+    # 587 con STARTTLS e' la porta di invio autenticato di Gmail. L'alternativa
+    # e' la 465 con TLS dal primo byte (slide 8): in quel caso si accende
+    # mail.smtp.ssl.enable e si spengono le due righe starttls.
+    port: ${MAIL_PORT:587}
+    # Nessun valore predefinito: se la variabile non c'e', l'applicazione non
+    # parte e lo dice. Meglio di un 535 dopo dieci minuti (slide 9).
+    username: ${MAIL_USERNAME}
+    # NON e' la password dell'account Google: e' la "password per le app" da 16
+    # caratteri, e vive solo in una variabile d'ambiente (slide 9 e 11).
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          # Queste due righe non le mette Spring Boot. Senza, Gmail rifiuta:
+          # niente autenticazione, niente cifratura, niente invio.
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          # Senza timeout l'attesa su un server che non risponde e' illimitata
+          # e il thread della richiesta resta appeso (slide 10).
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+        # La conversazione con il server compare nel log: e' il primo posto
+        # dove guardare quando l'invio fallisce (slide 12 e 46).
+        debug: ${MAIL_DEBUG:true}
+
+app:
+  mail:
+    # Gmail riscrive comunque il From con l'account autenticato (slide 20):
+    # per questo il valore predefinito e' l'utenza stessa.
+    mittente: ${MAIL_FROM:${MAIL_USERNAME}}
+  cors:
+    allowed-origin: ${ALLOWED_ORIGIN:http://localhost:5173}
+
+logging:
+  level:
+    it.epicode.demo.smtp: INFO

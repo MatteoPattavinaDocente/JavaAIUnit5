@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: d1-demo03-benvenuto
+
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+        debug: ${MAIL_DEBUG:false}
+
+  thymeleaf:
+    # Il valore predefinito e' classpath:/templates/ : lo scriviamo per farlo
+    # vedere, non perche' serva (slide 28).
+    prefix: classpath:/templates/
+    suffix: .html
+    # In sviluppo la cache si spegne, altrimenti una modifica al template non si
+    # vede fino al riavvio (slide 34).
+    cache: false
+
+  messages:
+    basename: messages
+    encoding: UTF-8
+
+app:
+  mail:
+    # Gmail riscrive il From con l'account autenticato (slide 20).
+    mittente: ${MAIL_FROM:${MAIL_USERNAME}}
+  # Il collegamento nell'email deve essere ASSOLUTO: un percorso relativo non
+  # significa niente dentro un client di posta.
+  base-url: ${APP_BASE_URL:http://localhost:8080}
+  cors:
+    allowed-origin: ${ALLOWED_ORIGIN:http://localhost:5173}
+
+logging:
+  level:
+    it.epicode.demo.benvenuto: INFO

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Conferma il tuo indirizzo</title>
+</head>
+<!--
+  Stili negli attributi, impaginazione a tabelle, 600 pixel: le regole della
+  slide 30. Il collegamento e' assoluto e porta il token in coda (slide 37).
+-->
+<body style="margin:0; padding:24px 0; background:#f6f7f9;
+             font-family: Arial, Helvetica, sans-serif; color:#1c1f24;">
+
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0"
+       align="center" style="width:600px; max-width:100%; background:#ffffff;
+       border:1px solid #d5d8dd; border-radius:8px;">
+  <tr>
+    <td style="padding:24px;">
+
+      <img src="cid:logo" alt="EPICODE" width="120"
+           style="display:block; border:0; margin-bottom:20px;">
+
+      <h1 th:text="#{email.titolo}" style="margin:0 0 12px; font-size:22px; color:#061e37;">
+        Confermiamo che sei tu
+      </h1>
+
+      <p th:text="#{email.corpo}" style="margin:0 0 16px; font-size:15px; line-height:1.5;">
+        Abbiamo creato il tuo account.
+      </p>
+
+      <p th:text="#{email.scadenza(${ore})}" style="margin:0 0 24px; font-size:15px; line-height:1.5;">
+        Il collegamento vale 24 ore e funziona una volta sola.
+      </p>
+
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td style="background:#061e37; border-radius:6px;">
+            <a th:href="${collegamento}" href="https://esempio.local/conferma"
+               th:text="#{email.pulsante}"
+               style="display:inline-block; padding:12px 22px; color:#ffffff;
+                      font-size:15px; text-decoration:none;">
+              Conferma l’indirizzo
+            </a>
+          </td>
+        </tr>
+      </table>
+
+      <!-- Il collegamento in chiaro serve a chi ha i pulsanti bloccati, e serve
+           al test: e' da qui che il test estrae il token (slide 43). -->
+      <p style="margin:24px 0 0; font-size:12px; line-height:1.5; color:#5a6069;">
+        <span>Se il pulsante non funziona, copia questo indirizzo:</span><br>
+        <span th:text="${collegamento}" style="word-break:break-all;">https://esempio.local/conferma</span>
+      </p>
+
+      <p th:text="#{email.ignora}" style="margin:16px 0 0; font-size:12px; line-height:1.5; color:#5a6069;">
+        Se non hai richiesto tu la registrazione, ignora questo messaggio.
+      </p>
+
+      <div th:replace="~{email/frammenti :: piede}"></div>
+
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
