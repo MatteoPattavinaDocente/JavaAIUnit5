@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: d2-demo04-chat
+
+  datasource:
+    # Database PROPRIO, non quello delle demo 2 e 3: qui la tabella messaggi ha
+    # in piu' la colonna conversazione_id, e ddl-auto: update non riesce ad
+    # aggiungere una colonna NOT NULL a una tabella che ha gia' delle righe.
+    # E' il limite di update, dal vivo (vedi GUIDA, punti di attenzione).
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/W2D2Dem4_ChatCompleta}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:admin}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    show-sql: false
+
+app:
+  cors:
+    allowed-origin: ${ALLOWED_ORIGIN:http://localhost:5173}
+
+logging:
+  level:
+    it.epicode.demo.chat: INFO

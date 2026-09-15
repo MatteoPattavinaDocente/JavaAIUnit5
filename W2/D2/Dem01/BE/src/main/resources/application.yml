@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: d2-demo01-canale
+
+app:
+  cors:
+    # Vale sia per /api/** sia per le origini consentite dall'endpoint STOMP.
+    # Il client passa dal proxy di Vite, quindi l'Origin resta quella del
+    # server di sviluppo.
+    allowed-origin: ${ALLOWED_ORIGIN:http://localhost:5173}
+
+logging:
+  level:
+    it.epicode.demo.canale: INFO
+    # Alza a DEBUG per vedere ogni frame STOMP in entrata e in uscita.
+    org.springframework.web.socket: INFO
+    org.springframework.messaging.simp: INFO

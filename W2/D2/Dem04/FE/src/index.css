@@ -1,0 +1,238 @@
+:root {
+  color-scheme: light;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --bordo: #d5d8dd;
+  --avviso: #b23c17;
+  --ok: #1d7a46;
+}
+
+body {
+  margin: 0;
+  background: #f6f7f9;
+  color: #1c1f24;
+}
+
+main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 4rem;
+}
+
+h1 {
+  margin-bottom: 0.2rem;
+}
+
+h2 {
+  font-size: 1.05rem;
+  margin-top: 0;
+}
+
+.sub {
+  margin-top: 0;
+  color: #5a6069;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid var(--bordo);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0.75rem 0 0;
+}
+
+label {
+  display: block;
+  margin: 0.6rem 0 0.2rem;
+  font-size: 0.85rem;
+  color: #5a6069;
+}
+
+label.inline {
+  display: inline;
+  margin: 0;
+  color: #1c1f24;
+}
+
+button {
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--bordo);
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--bordo);
+  border-radius: 6px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+input[type='checkbox'] {
+  width: auto;
+}
+
+textarea {
+  font-family: ui-monospace, monospace;
+  font-size: 0.8rem;
+}
+
+code {
+  font-family: ui-monospace, monospace;
+  font-size: 0.85em;
+  background: #f2f3f5;
+  padding: 0.05rem 0.25rem;
+  border-radius: 4px;
+}
+
+pre {
+  white-space: pre-wrap;
+  background: #f2f3f5;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.35rem 0.5rem;
+  border-bottom: 1px solid var(--bordo);
+  font-size: 0.9rem;
+  vertical-align: top;
+}
+
+iframe {
+  width: 100%;
+  height: 420px;
+  border: 1px solid var(--bordo);
+  border-radius: 6px;
+  background: #fff;
+}
+
+.errore {
+  border-color: var(--avviso);
+  color: var(--avviso);
+}
+
+.ok {
+  color: var(--ok);
+}
+
+.pallino {
+  display: inline-block;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  margin-right: 0.4rem;
+}
+
+.acceso {
+  background: var(--ok);
+}
+
+.spento {
+  background: var(--avviso);
+}
+
+/* --- la lista dei messaggi ------------------------------------------------ */
+
+ul.messaggi {
+  list-style: none;
+  margin: 0 0 0.5rem;
+  padding: 0;
+  max-height: 340px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+ul.messaggi li {
+  max-width: 78%;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--bordo);
+  border-radius: 10px;
+  background: #fff;
+}
+
+ul.messaggi li.mio {
+  align-self: flex-end;
+  background: #eef3fb;
+  border-color: #c9d7ea;
+}
+
+ul.messaggi li.altrui {
+  align-self: flex-start;
+}
+
+ul.messaggi li.vuoto {
+  align-self: center;
+  border: 0;
+  color: #5a6069;
+  background: transparent;
+}
+
+ul.messaggi p {
+  margin: 0 0 0.2rem;
+  white-space: pre-wrap;
+}
+
+.meta {
+  font-size: 0.72rem;
+  color: #5a6069;
+}
+
+/* --- la chat completa ----------------------------------------------------- */
+
+.badge {
+  display: inline-block;
+  min-width: 1.2rem;
+  padding: 0.05rem 0.35rem;
+  border-radius: 999px;
+  background: var(--avviso);
+  color: #fff;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.troncato {
+  max-width: 22rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scrive {
+  min-height: 1.2rem;
+  margin: 0.2rem 0 0;
+  font-size: 0.8rem;
+  color: #5a6069;
+  font-style: italic;
+}
+
+.disegni {
+  color: #8a9099;
+}

@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: d2-demo03-client
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/W2D2Dem23_Chat}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:admin}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    show-sql: false
+
+app:
+  cors:
+    allowed-origin: ${ALLOWED_ORIGIN:http://localhost:5173}
+
+logging:
+  level:
+    it.epicode.demo.client: INFO
