@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: d3-demo02-api
+
+  http:
+    # Al PLURALE: in Spring Boot 4 le proprieta' dei client HTTP stanno sotto
+    # spring.http.clients (slide 8). Il builder di RestClient le eredita.
+    clients:
+      # Aprire il collegamento: pochi secondi, oltre e' un guasto.
+      connect-timeout: 5s
+      # Aspettare la risposta: un modello linguistico puo' impiegare decine di
+      # secondi. Un valore troppo corto interrompe risposte che stavano
+      # arrivando - ed e' la riga «Timeout» della slide 46.
+      #
+      # Con OpenRouter l'attesa e' spesso piu' lunga: dietro c'e' un secondo
+      # salto verso il fornitore vero, e i modelli gratuiti stanno in coda.
+      read-timeout: ${LLM_READ_TIMEOUT:120s}
+
+  # Una richiesta lenta occupa un thread: con i thread virtuali l'attesa costa
+  # poco anche con molte chiamate in parallelo (slide 8).
+  threads:
+    virtual:
+      enabled: true
+
+app:
+  llm:
+    # Configurabile di proposito: si punta a un indirizzo sbagliato per vedere
+    # l'errore, o a un altro servizio compatibile con il protocollo di OpenAI.
+    base-url: ${LLM_BASE_URL:https://openrouter.ai/api/v1}
+    # La chiave NON sta qui: arriva da una variabile d'ambiente (slide 37).
+    api-key: ${LLM_API_KEY:}
+    # Su OpenRouter il nome del modello ha due parti: fornitore/modello.
+    # Il suffisso «:free» sceglie la variante senza costo, che e' piu' lenta e
+    # ha un limite di richieste piu' basso.
+    model: ${LLM_MODEL:nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free}
+    max-tokens: ${LLM_MAX_TOKENS:4096}
+    # Quanto lavoro il modello mette nel ragionamento: low per compiti semplici
+    # come un riassunto, high quando la qualita' conta. Vuoto = non lo chiediamo
+    # affatto. Sui modelli che non ragionano viene ignorato.
+    effort: ${LLM_EFFORT:low}
+    # Facoltative: OpenRouter le usa per le sue classifiche pubbliche.
+    site-url: ${LLM_SITE_URL:}
+    site-name: ${LLM_SITE_NAME:}
+  cors:
+    allowed-origin: ${ALLOWED_ORIGIN:http://localhost:5173}
+
+logging:
+  level:
+    it.epicode.demo.api: INFO

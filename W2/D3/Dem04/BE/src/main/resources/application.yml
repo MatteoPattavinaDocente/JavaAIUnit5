@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: d3-demo04-chiavi
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/W2D3Dem4_Llm}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:admin}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+
+  http:
+    clients:
+      connect-timeout: 5s
+      read-timeout: ${LLM_READ_TIMEOUT:120s}
+
+  threads:
+    virtual:
+      enabled: true
+
+# Tutti i valori del servizio esterno in un punto, legati al record
+# LlmProperties (slide 38 e 39).
+#
+# Il prefisso e' «app.llm» e non «app.openrouter»: il fornitore e' un dettaglio
+# di configurazione, e cambiarlo non deve costare un rinomina in tutto il
+# progetto.
+app:
+  llm:
+    base-url: ${LLM_BASE_URL:https://openrouter.ai/api/v1}
+    # La chiave NON ha un valore qui: arriva dall'ambiente. Se la variabile non
+    # e' definita l'applicazione non parte (slide 40).
+    api-key: ${LLM_API_KEY:}
+    model: ${LLM_MODEL:nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free}
+    max-tokens: ${LLM_MAX_TOKENS:4096}
+    effort: ${LLM_EFFORT:low}
+    # Il tetto per utente e per giorno. Basso di proposito, per poterlo
+    # superare in aula in tre chiamate. Con un modello di ragionamento una
+    # chiamata sola puo' arrivare a max-tokens, da cui il tetto a 6000.
+    limite-giornaliero-token: ${LLM_LIMITE_GIORNALIERO:6000}
+    # Facoltative: OpenRouter le usa per le sue classifiche pubbliche.
+    site-url: ${LLM_SITE_URL:}
+    site-name: ${LLM_SITE_NAME:}
+  cors:
+    allowed-origin: ${ALLOWED_ORIGIN:http://localhost:5173}
+
+logging:
+  level:
+    it.epicode.demo.chiavi: INFO

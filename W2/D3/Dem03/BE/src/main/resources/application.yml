@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: d3-demo03-estrazione
+
+  http:
+    clients:
+      connect-timeout: 5s
+      read-timeout: ${LLM_READ_TIMEOUT:120s}
+
+  threads:
+    virtual:
+      enabled: true
+
+app:
+  llm:
+    base-url: ${LLM_BASE_URL:https://openrouter.ai/api/v1}
+    api-key: ${LLM_API_KEY:}
+    # ATTENZIONE: response_format con json_schema vale solo per i modelli che
+    # lo sostengono. Sui modelli che non lo sostengono viene ignorato in
+    # silenzio e la risposta torna testo libero: il servizio lo gestisce, ma la
+    # dimostrazione dello schema non si vede. L'elenco dei modelli adatti si
+    # filtra su openrouter.ai/models con «structured outputs».
+    model: ${LLM_MODEL:nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free}
+    max-tokens: ${LLM_MAX_TOKENS:4096}
+    effort: ${LLM_EFFORT:low}
+    site-url: ${LLM_SITE_URL:}
+    site-name: ${LLM_SITE_NAME:}
+  cors:
+    allowed-origin: ${ALLOWED_ORIGIN:http://localhost:5173}
+
+logging:
+  level:
+    it.epicode.demo.estrazione: INFO
