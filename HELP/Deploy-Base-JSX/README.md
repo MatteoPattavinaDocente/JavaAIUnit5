@@ -23,7 +23,7 @@ Scheletro di partenza, pronto per il deploy su Render.
    ```
    Credenziali diverse da `postgres` / `admin`: variabili `DB_URL`, `DB_USERNAME`,
    `DB_PASSWORD`, oppure `be/src/main/resources/application.yml`.
-2. Doppio clic su `avvia.cmd`, oppure:
+2. Doppio clic su `avvia.cmd` (Windows) o `./avvia.sh` (macOS/Linux), oppure:
    ```
    cd be && .\mvnw.cmd spring-boot:run
    cd fe && npm install && npm run dev
@@ -48,7 +48,7 @@ Scheletro di partenza, pronto per il deploy su Render.
 
 ```
 render.yaml                 blueprint: database + backend + frontend
-avvia.cmd                   avvio locale
+avvia.cmd / avvia.sh        avvio locale (Windows / macOS-Linux)
 be/
   Dockerfile                usato solo da Render
   src/main/java/it/epicode/base/
